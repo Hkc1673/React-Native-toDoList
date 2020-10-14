@@ -8,7 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import Note from "./note";
+import Note from "./Note";
 
 
 
@@ -19,21 +19,29 @@ export default class Main extends React.Component  {
 
       this.state = {
         noteArray:[],
-        noteText:""
+        noteText:"",
+        // counter:0,
       }
     }
+
+    // myFunction() {
+    //   let myVariable = 0;
+
+    //   myVariable++;
+    // }
 
     render(){
 
         let notes = this.state.noteArray.map((val,key)=>{
-          return <Note key={key} keyval val={val}
+          return <Note key={key} keyval={key} val={val}
                   deleteMethod={()=> this.deleteNote(key)}/>
-        })
+        });
 
         return (
             <View style= {styles.container}>
               <View style={styles.header}>
-                <Text style={styles.headerText}>ToDo</Text>
+                <Text style={styles.headerText}>TODO</Text>
+                <Text style={{ fontSize: 50 }}>{this.state.counter}</Text>
               </View>
 
               <ScrollView style={styles.scrollContainer}>
@@ -45,36 +53,33 @@ export default class Main extends React.Component  {
                  style={styles.textInput}
                  onChangeText={(noteText)=> this.setState({noteText})}
                  value={this.state.noteText}
-                 placeholder="Task"
-                 placeholderTextColor="white"
+                 placeholder="Write New Task"
+                 placeholderTextColor="black"
                  underlineColorAndroid="transparent">
                 </TextInput>
               </View>
 
-                <TouchableOpacity style={styles.addButton}>
-                  <Text style={styles.addButtonText}>Add</Text>
+                <TouchableOpacity onPress={this.addNote.bind(this)}
+                style={styles.addButton}>
+                  <Text style={styles.addButtonText}>ADD TO DO</Text>
                 </TouchableOpacity>
               
             </View>
           );
     }
-    addtask() {
+    addNote() {
       if (this.state.noteText) {
-        var date = new Date();
 
         this.state.noteArray.push({
-          "date" : date.getFullYear()+
-          "/" +(date.getMonth() + 1)+
-          "/" + date.getDate(),
           "note":this.state.noteText
         });
 
         this.setState({noteArray: this.state.noteArray});
-        this.setState({noteText: this.state.noteText});
+        this.setState({noteText: ""});
       }
     }
 
-    deleteNote(){
+    deleteNote(key){
         this.state.noteArray.splice(key,1);
         this.setState({noteArray: this.state.noteArray});
     }
@@ -88,20 +93,20 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    backgroundColor: '#E91E63',
-    alignItems: 'center',
+    backgroundColor: '#37474F',
     justifyContent: 'center',
     borderBottomWidth: 10,
     borderBottomColor: '#ddd',
   },
   headerText: {
-    color: 'white',
-    fontSize: 18,
+    color: '#FFA726',
+    fontWeight:"bold",
+    fontSize: 30,
     padding: 26,
   },
   scrollContainer: {
     flex: 1,
-    marginBottom: 100,
+    backgroundColor: "#37474F",
   },
   footer: {
     position: 'absolute',
@@ -109,24 +114,31 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     zIndex: 10,
+    backgroundColor: "#B0BEC5",
+    margin:10,
+    borderRadius: 20,
+
   },
   textInput: {
     alignSelf: 'stretch',
-    color: '#fff',
+    color: 'black',
     padding: 20,
-    backgroundColor: '#252525',
+    backgroundColor: '#ECEFF1',
     borderTopWidth: 2,
     borderTopColor: '#ededed',
+    borderRadius: 20,
+    margin: 20,
+    marginBottom: 100,
   },
   addButton: {
     position: 'absolute',
     zIndex: 11,
-    right: 20,
-    bottom: 90,
-    backgroundColor: '#E91E63',
-    width: 90,
-    height: 90,
-    borderRadius: 50,
+    right: 180,
+    bottom: 25,
+    backgroundColor: '#546E7A',
+    width: 250,
+    height: 60,
+    borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 8,
