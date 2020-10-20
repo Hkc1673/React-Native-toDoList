@@ -27,8 +27,6 @@ const styles = StyleSheet.create({
         position: 'relative',
         padding: 20,
         paddingRight:100,
-        borderBottomWidth: 2,
-        borderBottomColor: '#ededed',
     },
     noteText: {
         padding: 20,
@@ -45,7 +43,8 @@ const styles = StyleSheet.create({
         padding: 10,
         top: 10,
         bottom: 10,
-        right: 10
+        right: 10,
+        borderRadius: 10,
     },
     noteDeleteText: {
         color: 'white',

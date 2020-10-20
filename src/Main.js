@@ -7,6 +7,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 import Note from "./Note";
 
@@ -20,15 +21,10 @@ export default class Main extends React.Component  {
       this.state = {
         noteArray:[],
         noteText:"",
-        // counter:0,
       }
     }
 
-    // myFunction() {
-    //   let myVariable = 0;
-
-    //   myVariable++;
-    // }
+   
 
     render(){
 
@@ -41,7 +37,7 @@ export default class Main extends React.Component  {
             <View style= {styles.container}>
               <View style={styles.header}>
                 <Text style={styles.headerText}>TODO</Text>
-                <Text style={{ fontSize: 50 }}>{this.state.counter}</Text>
+                <Text style={{ fontSize: 50, color: '#FFA726'  }}>{notes.length}</Text>
               </View>
 
               <ScrollView style={styles.scrollContainer}>
@@ -53,16 +49,16 @@ export default class Main extends React.Component  {
                  style={styles.textInput}
                  onChangeText={(noteText)=> this.setState({noteText})}
                  value={this.state.noteText}
-                 placeholder="Write New Task"
-                 placeholderTextColor="black"
+                 placeholder="Write New Task..."
                  underlineColorAndroid="transparent">
                 </TextInput>
-              </View>
+              
 
                 <TouchableOpacity onPress={this.addNote.bind(this)}
                 style={styles.addButton}>
                   <Text style={styles.addButtonText}>ADD TO DO</Text>
                 </TouchableOpacity>
+                </View>
               
             </View>
           );
@@ -91,57 +87,47 @@ export default class Main extends React.Component  {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#37474F",
   },
   header: {
-    backgroundColor: '#37474F',
-    justifyContent: 'center',
-    borderBottomWidth: 10,
-    borderBottomColor: '#ddd',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 20,
   },
   headerText: {
     color: '#FFA726',
     fontWeight:"bold",
-    fontSize: 30,
-    padding: 26,
+    fontSize: 50,
   },
   scrollContainer: {
     flex: 1,
-    backgroundColor: "#37474F",
   },
   footer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    zIndex: 10,
+    height:180,
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: "#B0BEC5",
     margin:10,
     borderRadius: 20,
 
   },
   textInput: {
-    alignSelf: 'stretch',
     color: 'black',
     padding: 20,
     backgroundColor: '#ECEFF1',
-    borderTopWidth: 2,
-    borderTopColor: '#ededed',
     borderRadius: 20,
     margin: 20,
-    marginBottom: 100,
+    marginBottom: 10,
+    width: Dimensions.get("window").width*0.85,
   },
   addButton: {
-    position: 'absolute',
-    zIndex: 11,
-    right: 180,
-    bottom: 25,
     backgroundColor: '#546E7A',
     width: 250,
     height: 60,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    elevation: 8,
   },
   addButtonText: {
     color: '#fff',
